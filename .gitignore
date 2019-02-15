@@ -22,3 +22,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 elixir_2048-*.tar
 
+# Code I wrote that I might want in the future
+.legacy
