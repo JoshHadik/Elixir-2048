@@ -22,29 +22,28 @@ defmodule Elixir2048Test do
       assert Elixir2048.move_right([nil, 2, 2, 2]) == [nil, nil, 2, 4]
     end
   end
-  #
-  # describe "move_left" do
-  #   test "moves single element in list all the way to left side" do
-  #     assert Elixir2048.move_left([nil, 2, nil, nil]) == [2, nil, nil, nil]
-  #     assert Elixir2048.move_left([2, nil , nil, nil]) == [2, nil, nil, nil]
-  #     assert Elixir2048.move_left([nil , nil, nil, 2]) == [2, nil, nil, nil]
-  #   end
-  #
-  #   test "moves mismatched elements in list all the way to left side" do
-  #     assert Elixir2048.move_left([4, 2, nil, nil]) == [4, 2, nil, nil]
-  #     assert Elixir2048.move_left([2, nil, 16, nil]) == [2, 16, nil, nil]
-  #     assert Elixir2048.move_left([2, 32, nil, 64]) == [2, 32, 64, nil]
-  #   end
-  #
-  #   test "adds matched elements before moving to left" do
-  #     assert Elixir2048.move_left([2, 2, nil, nil]) == [4, nil, nil, nil]
-  #     assert Elixir2048.move_left([16, 16, nil, 2]) == [32, 2, nil, nil]
-  #     assert Elixir2048.move_left([16, 16, 2, 2]) == [32, 4, nil, nil]
-  #     assert Elixir2048.move_left([2, 2, 4, 8]) == [16, nil, nil, nil]
-  #     assert Elixir2048.move_left([nil, 2, 2, 2]) == [4, 2, nil, nil]
-  #   end
-  # end
 
+  describe "move_left" do
+    test "moves single element in list all the way to left side" do
+      assert Elixir2048.move_left([nil, 2, nil, nil]) == [2, nil, nil, nil]
+      assert Elixir2048.move_left([2, nil , nil, nil]) == [2, nil, nil, nil]
+      assert Elixir2048.move_left([nil , nil, nil, 2]) == [2, nil, nil, nil]
+    end
+
+    test "moves mismatched elements in list all the way to left side" do
+      assert Elixir2048.move_left([4, 2, nil, nil]) == [4, 2, nil, nil]
+      assert Elixir2048.move_left([2, nil, 16, nil]) == [2, 16, nil, nil]
+      assert Elixir2048.move_left([2, 32, nil, 64]) == [2, 32, 64, nil]
+    end
+
+    test "adds matched elements before moving to left" do
+      assert Elixir2048.move_left([2, 2, nil, nil]) == [4, nil, nil, nil]
+      assert Elixir2048.move_left([16, 16, nil, 2]) == [32, 2, nil, nil]
+      assert Elixir2048.move_left([16, 16, 2, 2]) == [32, 4, nil, nil]
+      assert Elixir2048.move_left([2, 2, 4, 8]) == [16, nil, nil, nil]
+      assert Elixir2048.move_left([nil, 2, 2, 2]) == [4, 2, nil, nil]
+    end
+  end
 end
 
 

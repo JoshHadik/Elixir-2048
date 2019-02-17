@@ -5,11 +5,11 @@ defmodule Elixir2048.MoveRight do
   def call(game) do
     game
     |> get_all_values()
-    |> Combinator.combine_matched_values()
+    |> Combinator.combine_matched_values(:right_to_left)
     |> add_spaces_to_list()
   end
 
-  defp get_all_values(game = %Game{ list: list }) do
+  defp get_all_values(game = %Game{list: list}) do
     %Game{ List.foldr(list, game, &add_value/2) | list: []}
   end
 
