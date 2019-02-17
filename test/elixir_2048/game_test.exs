@@ -89,4 +89,76 @@ defmodule Elixir2048.GameTest do
       assert actual_grid == expected_grid
     end
   end
+
+  describe "#slide_up" do
+    test "moves all elements in grid to left side with grid 1" do
+      expected_grid = [
+        [4  , nil, 4  , 16 ],
+        [2  , nil, 2  , 4  ],
+        [nil, nil, nil, 2  ],
+        [nil, nil, nil, 4  ]
+      ]
+
+      actual_grid =
+        @input_grid_1
+        |> Game.new()
+        |> Game.slide_up()
+        |> Game.get_grid()
+
+      assert actual_grid == expected_grid
+    end
+
+    test "moves all elements in grid to left side with grid 2" do
+      expected_grid = [
+        [4096, 64 , 1024, 64  ],
+        [128 , 2  , 16  , 2   ],
+        [2   , 512, 4   , nil ],
+        [nil , nil, nil , nil ]
+      ]
+
+      actual_grid =
+        @input_grid_2
+        |> Game.new()
+        |> Game.slide_up()
+        |> Game.get_grid()
+
+      assert actual_grid == expected_grid
+    end
+  end
+
+  describe "#slide_down" do
+    test "moves all elements in grid to left side with grid 1" do
+      expected_grid = [
+        [nil, nil, nil, 16 ],
+        [nil, nil, nil, 4  ],
+        [2  , nil, 2  , 2  ],
+        [4  , nil, 4  , 4  ]
+      ]
+
+      actual_grid =
+        @input_grid_1
+        |> Game.new()
+        |> Game.slide_down()
+        |> Game.get_grid()
+
+      assert actual_grid == expected_grid
+    end
+
+    test "moves all elements in grid to left side with grid 2" do
+      expected_grid = [
+        [nil , nil, nil , nil ],
+        [4096, 64 , 1024, nil ],
+        [128 , 2  , 16  , 64 ],
+        [2   , 512, 4   , 2   ]
+      ]
+
+      actual_grid =
+        @input_grid_2
+        |> Game.new()
+        |> Game.slide_down()
+        |> Game.get_grid()
+
+      assert actual_grid == expected_grid
+    end
+  end
 end
