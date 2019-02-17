@@ -4,22 +4,26 @@ defmodule Elixir2048.Vector do
 
   # New vector
 
-  def new(list), do: %Vector{list: list}
+  def new_vector(list), do: %Vector{list: list}
+  def get_list(%Vector{list: list}), do: list
 
   # Move by direction
 
-  def move_right(vector) do
-    vector
-    |> split_values_and_spaces()
-    |> combine_matched_values(:right_to_left)
-    |> add_spaces_to_list(:left)
+  def slide(list, :forward) do
+    list |> slide_list(combine_from: :last_to_first, add_spaces_to: :front)
   end
 
-  def move_left(vector) do
-    vector
+  def slide(list, :backward) do
+    list |> slide_list(combine_from: :first_to_last, add_spaces_to: :back)
+  end
+
+  defp slide_list(list, combine_from: direction, add_spaces_to: side) do
+    list
+    |> new_vector()
     |> split_values_and_spaces()
-    |> combine_matched_values(:left_to_right)
-    |> add_spaces_to_list(:right)
+    |> combine_matched_values(direction)
+    |> add_spaces_to_list(side)
+    |> get_list()
   end
 
   # Splits Values and Spaces
@@ -39,13 +43,13 @@ defmodule Elixir2048.Vector do
 
   # Add Combined Values to List
 
-  defp combine_matched_values(vector = %Vector{values: values}, :left_to_right) do
+  defp combine_matched_values(vector = %Vector{values: values}, :first_to_last) do
     values
     |> combine_pairs()
     |> add_new_values_to_list(vector)
   end
 
-  defp combine_matched_values(vector = %Vector{values: values}, :right_to_left) do
+  defp combine_matched_values(vector = %Vector{values: values}, :last_to_first) do
     values
     |> Enum.reverse()
     |> combine_pairs()
@@ -72,11 +76,11 @@ defmodule Elixir2048.Vector do
 
   # Add Spaces to List
 
-  defp add_spaces_to_list(vector = %Vector{list: list, spaces: spaces}, :right) do
+  defp add_spaces_to_list(vector = %Vector{list: list, spaces: spaces}, :back) do
     %Vector{ vector | list: list ++ spaces, spaces: [] }
   end
 
-  defp add_spaces_to_list(vector = %Vector{list: list, spaces: spaces}, :left) do
+  defp add_spaces_to_list(vector = %Vector{list: list, spaces: spaces}, :front) do
     %Vector{ vector | list: spaces ++ list, spaces: [] }
   end
 end

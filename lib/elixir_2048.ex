@@ -1,13 +1,12 @@
 defmodule Elixir2048 do
-  alias Elixir2048.Vector, as: Vector
+  alias Elixir2048.Game, as: Game
 
   def move_right(list) do
-    list |> Vector.new() |> Vector.move_right() |> return_list()
+    Game.new(list) |> Game.slide_right
   end
 
   def move_left(list) do
-    list |> Vector.new() |> Vector.move_left() |> return_list()
+    Game.new(list) |> Game.slide_left
   end
 
-  defp return_list(%Vector{list: list}), do: list
 end
