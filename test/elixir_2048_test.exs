@@ -47,8 +47,8 @@ defmodule Elixir2048Test do
 end
 
 
-# move_right single list
-# move_left single list
+# move_right single list - DONE
+# move_left single list - DONE
 # move_right & move_left game grid
 # move_up
 # move_down
