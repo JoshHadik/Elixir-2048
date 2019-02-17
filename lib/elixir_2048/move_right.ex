@@ -26,13 +26,4 @@ defmodule Elixir2048.MoveRight do
     %Game{ game | list: [nil | list], spaces: spaces - 1}
     |> add_spaces_to_list()
   end
-
-  defp add_spaces(game = %Game{spaces: 0}), do: game
-
-  defp add_spaces(game = %Game{list: list, spaces: spaces}) do
-    add_spaces(%Game{game |
-      list: [nil | list],
-      spaces: spaces - 1
-    })
-  end
 end

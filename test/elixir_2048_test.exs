@@ -40,7 +40,7 @@ defmodule Elixir2048Test do
       assert Elixir2048.move_left([2, 2, nil, nil]) == [4, nil, nil, nil]
       assert Elixir2048.move_left([16, 16, nil, 2]) == [32, 2, nil, nil]
       assert Elixir2048.move_left([16, 16, 2, 2]) == [32, 4, nil, nil]
-      assert Elixir2048.move_left([2, 2, 4, 8]) == [16, nil, nil, nil]
+      assert Elixir2048.move_left([2, 2, 4, 8]) == [4, 4, 8, nil]
       assert Elixir2048.move_left([nil, 2, 2, 2]) == [4, 2, nil, nil]
     end
   end
