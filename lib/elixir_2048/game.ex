@@ -4,6 +4,7 @@ defmodule Elixir2048.Game do
   defstruct grid: [[]]
 
   def new(grid), do: %Game{grid: grid}
+  def get_grid(%Game{grid: grid}), do: grid 
 
   def slide_right(game = %Game { grid: grid }) do
     game |> slide_vectors(:forward)

@@ -1,6 +1,7 @@
 defmodule Elixir2048.VectorTest do
   use ExUnit.Case
   doctest Elixir2048.Vector
+  
   alias Elixir2048.Vector, as: Vector
 
   describe "#slide(:forward)" do
