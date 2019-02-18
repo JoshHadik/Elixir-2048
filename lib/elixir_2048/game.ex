@@ -12,7 +12,7 @@ defmodule Elixir2048.Game do
     %Game{ game | grid: new_grid }
   end
 
-  ## Slide Direction Handlers ##
+  ## Slide Direction Actions ##
 
   def slide_right(game = %Game{}) do
     game |> slide_rows(:forward)
@@ -30,9 +30,46 @@ defmodule Elixir2048.Game do
     game |> slide_columns(:forward)
   end
 
+  ## Check status of game
+
+  def check_status(game) do
+    if is_game_over?(game) do
+      {:game_over, game}
+    else
+      {:in_progress, game}
+    end
+  end
+
+  # Checks if game is over by first checking for nil spaces, and then testing every possible move direction and checking whether it changed the board or not.
+  defp is_game_over?(game = %Game{grid: grid}) do
+    !empty_spaces?(grid) &&
+    slide_columns(game, :forward) == game &&
+    slide_columns(game, :backward) == game &&
+    slide_rows(game, :forward) == game &&
+    slide_rows(game, :backward) == game
+  end
+
+  # Return false if reached the end of all lists and no nil spaces found
+  defp empty_spaces?([]), do: false
+
+  # Check for empty spaces in nested list
+  defp empty_spaces?([head | tail])
+  when is_list(head) do
+    empty_spaces?(head) && empty_spaces?(tail)
+  end
+
+  # Return true on first nil element
+  defp empty_spaces?([nil | _tail]), do: true
+
+  # Continue checking if element was not nil
+  defp empty_spaces?([head | tail]) do
+    empty_spaces?(tail)
+  end
+
   ## Vector Sliding ##
 
   # Slide columns up (backward) or down (forward)
+  # (transpose is used to convert grid from rows to columns and back)
   defp slide_columns(game = %Game { grid: grid }, direction) do
     grid
     |> transpose()

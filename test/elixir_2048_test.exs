@@ -7,5 +7,6 @@ end
 # move_right single list - DONE
 # move_left single list - DONE
 # move_right & move_left game grid - DONE
-# move_up
-# move_down
+# move_up - DONE
+# move_down - DONE
+# game_over - 
