@@ -55,7 +55,7 @@ defmodule Elixir2048.Game do
   # Check for empty spaces in nested list
   defp empty_spaces?([head | tail])
   when is_list(head) do
-    empty_spaces?(head) && empty_spaces?(tail)
+    empty_spaces?(head) || empty_spaces?(tail)
   end
 
   # Return true on first nil element

@@ -9,4 +9,4 @@ end
 # move_right & move_left game grid - DONE
 # move_up - DONE
 # move_down - DONE
-# game_over - 
+# game_over - DONE

@@ -21,7 +21,7 @@ defmodule Elixir2048.Vector do
     list |> slide_list(combine_from: :first_to_last, add_spaces_to: :back)
   end
 
-  # Compute logic of sliding list as a vector and return new list
+  # Conver list into vector, perform sliding logic, and return new list
   defp slide_list(list, combine_from: direction, add_spaces_to: side) do
     list
     |> new_vector()
