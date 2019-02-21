@@ -57,6 +57,7 @@ defmodule Elixir2048.GridTest do
     end
   end
 
+  # TODO - Use setup helper instead of module attributes.
   @grid_1 [
     [2  , nil, nil, 16 ],
     [nil, nil, 2  , 4  ],
