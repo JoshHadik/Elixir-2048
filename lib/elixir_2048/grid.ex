@@ -1,6 +1,6 @@
 defmodule Elixir2048.Grid do
   @moduledoc """
-  Handles logic related to the 2048 game grid, including rows left and right, sliding columns up and down, and checking if the grid has any remaining moves left.
+  Handles logic related to the 2048 game grid, including sliding rows left and right, sliding columns up and down, and checking if the grid has any remaining moves left.
   """
   alias Elixir2048.Vector, as: Vector
 

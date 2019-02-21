@@ -1,6 +1,6 @@
 defmodule Elixir2048.Game do
   @moduledoc """
-  Responsible for the game logic of Elixir 2048. Used to start new games, perform slide actions on an existing game, and check the status of the game.
+  Responsible for the game logic of Elixir 2048. Used to start new games, initiate slide actions on an existing game, and check the status of a game.
   """
   alias Elixir2048.Game, as: Game
   alias Elixir2048.Grid, as: Grid
