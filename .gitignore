@@ -24,3 +24,6 @@ elixir_2048-*.tar
 
 # Code I wrote that I might want in the future
 .legacy
+
+# DS_Store
+.DS_Store

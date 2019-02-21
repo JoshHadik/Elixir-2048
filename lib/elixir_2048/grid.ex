@@ -65,7 +65,6 @@ defmodule Elixir2048.Grid do
   Slides all columns in `grid` a specific `direction`. Moves elements up when `direction` is `:backward` and moves elements down when `direction` is `:forward`.
 
   ## Forward Example
-
       iex> grid = [[nil, 2, nil, 8], [nil, 2, nil, nil], [2, nil, 4, nil], [nil, nil, nil, 8]]
       iex> Elixir2048.Grid.slide_columns(grid, :forward)
       [
@@ -76,7 +75,6 @@ defmodule Elixir2048.Grid do
       ]
 
   ## Backward Example
-
       iex> grid = [[nil, 2, nil, 8], [nil, 2, nil, nil], [2, nil, 4, nil], [nil, nil, nil, 8]]
       iex> Elixir2048.Grid.slide_columns(grid, :backward)
       [
@@ -102,7 +100,6 @@ defmodule Elixir2048.Grid do
   Slides all rows in `grid` a specific `direction`. Moves elements to the right when `direction` is `:forward` and to the left when `direction` is `:backward`.
 
   ## Forward Example
-
       iex> grid = [[nil, 2, nil, 2], [nil, 2, nil, nil], [4, nil, 4, nil],[nil, 2, nil, 8 ]]
       iex> Elixir2048.Grid.slide_rows(grid, :forward)
       [
@@ -113,7 +110,6 @@ defmodule Elixir2048.Grid do
       ]
 
   ## Backward Example
-
       iex> grid = [[nil, 2, nil, 2], [nil, 2, nil, nil], [4, nil, 4, nil],[nil, 2, nil, 8 ]]
       iex> Elixir2048.Grid.slide_rows(grid, :backward)
       [
