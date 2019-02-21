@@ -2,15 +2,16 @@ defmodule Elixir2048.Grid do
   alias Elixir2048.Vector, as: Vector
 
   @doc """
-  Creates a new grid of nil elements with number of columns and number of rows equal to `size`.
+  Creates a new grid of all nil elements with number of columns and rows equal to `size`.
 
-  iex> Elixir2048.Grid.empty_grid_of_size(4)
-  [
-    [nil, nil, nil, nil],
-    [nil, nil, nil, nil],
-    [nil, nil, nil, nil],
-    [nil, nil, nil, nil]
-  ]
+  ## Example
+      iex> Elixir2048.Grid.empty_grid_of_size(4)
+      [
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil]
+      ]
   """
   def empty_grid_of_size(size) do
     nil
@@ -21,10 +22,11 @@ defmodule Elixir2048.Grid do
   @doc """
   Randomly assigns either the value 2 or 4 to a random empty spaces in `grid` and repeats this operation `repeat` times.
 
-  iex> Elixir2048.Grid.empty_grid_of_size(4) |>
-  iex> Elixir2048.Grid.populate_2_or_4_randomly(5) |>
-  iex> List.flatten() |> Enum.filter(&(&1 == 2 || &1 == 4)) |> length()
-  5
+  ## Example
+      iex> Elixir2048.Grid.empty_grid_of_size(4) |>
+      iex> Elixir2048.Grid.populate_2_or_4_randomly(5) |>
+      iex> List.flatten() |> Enum.filter(&(&1 == 2 || &1 == 4)) |> length()
+      5
   """
   def populate_2_or_4_randomly(grid, repeat \\ 1)
   def populate_2_or_4_randomly(grid, 0), do: grid
@@ -37,6 +39,7 @@ defmodule Elixir2048.Grid do
   # Returns 2 ~75% of the time, and 4 ~25% of the time.
   defp get_2_or_4_randomly(), do: Enum.random([2, 2, 2, 4])
 
+  # Adds value to random empty space in grid
   defp add_to_random_space_in_grid(value, grid) do
     grid
     |> get_location_of_all_spaces
@@ -46,34 +49,42 @@ defmodule Elixir2048.Grid do
 
   import Enum, only: [with_index: 1]
 
+  # Returns list of tuples containing {row, col} coordinate tuples for all empty spaces in grid
   defp get_location_of_all_spaces(grid) do
     for {row, x} <- with_index(grid), {el, y} <- with_index(row), el == nil do
       {x, y}
     end
   end
 
+  # Adds value to specific {row, col} coordinate in grid
   defp add_value_at_position({row, col}, grid, value) do
     put_in(grid, [Access.at(row), Access.at(col)], value)
   end
 
   @doc """
-  Slides all columns in `grid` based on `direction.` Moves elements up when `direction` is :backward and moves elements down when `direction` is :forward
+  Slides all columns in `grid` a specific `direction`. Moves elements up when `direction` is `:backward` and moves elements down when `direction` is `:forward`.
 
-  iex> grid = [[nil, 2, nil, 8], [nil, 2, nil, nil], [2, nil, 4, nil], [nil, nil, nil, 8]]
-  iex> Elixir2048.Grid.slide_columns(grid, :backward)
-  [
-    [2  , 4  , 4  , 16 ],
-    [nil, nil, nil, nil],
-    [nil, nil, nil, nil],
-    [nil, nil, nil, nil]
-  ]
-  iex> Elixir2048.Grid.slide_columns(grid, :forward)
-  [
-    [nil, nil, nil, nil],
-    [nil, nil, nil, nil],
-    [nil, nil, nil, nil],
-    [2  , 4  , 4  , 16 ]
-  ]
+  ## Forward Example
+
+      iex> grid = [[nil, 2, nil, 8], [nil, 2, nil, nil], [2, nil, 4, nil], [nil, nil, nil, 8]]
+      iex> Elixir2048.Grid.slide_columns(grid, :forward)
+      [
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil],
+        [2  , 4  , 4  , 16 ]
+      ]
+
+  ## Backward Example
+
+      iex> grid = [[nil, 2, nil, 8], [nil, 2, nil, nil], [2, nil, 4, nil], [nil, nil, nil, 8]]
+      iex> Elixir2048.Grid.slide_columns(grid, :backward)
+      [
+        [2  , 4  , 4  , 16 ],
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil]
+      ]
   """
   def slide_columns(grid, direction) do
     grid
@@ -88,23 +99,29 @@ defmodule Elixir2048.Grid do
   end
 
   @doc """
-  Slides all rows in `grid` based on `direction.` Moves elements right when `direction` is :forward and left when `direction` is :backward
+  Slides all rows in `grid` a specific `direction`. Moves elements to the right when `direction` is `:forward` and to the left when `direction` is `:backward`.
 
-  iex> grid = [[nil, 2, nil, 2], [nil, 2, nil, nil], [4, nil, 4, nil],[nil, 2, nil, 8 ]]
-  iex> Elixir2048.Grid.slide_rows(grid, :forward)
-  [
-    [nil, nil, nil, 4 ],
-    [nil, nil, nil, 2 ],
-    [nil, nil, nil, 8 ],
-    [nil, nil, 2  , 8 ]
-  ]
-  iex> Elixir2048.Grid.slide_rows(grid, :backward)
-  [
-    [4, nil, nil, nil ],
-    [2, nil, nil, nil ],
-    [8, nil, nil, nil ],
-    [2, 8  , nil, nil ]
-  ]
+  ## Forward Example
+
+      iex> grid = [[nil, 2, nil, 2], [nil, 2, nil, nil], [4, nil, 4, nil],[nil, 2, nil, 8 ]]
+      iex> Elixir2048.Grid.slide_rows(grid, :forward)
+      [
+        [nil, nil, nil, 4 ],
+        [nil, nil, nil, 2 ],
+        [nil, nil, nil, 8 ],
+        [nil, nil, 2  , 8 ]
+      ]
+
+  ## Backward Example
+
+      iex> grid = [[nil, 2, nil, 2], [nil, 2, nil, nil], [4, nil, 4, nil],[nil, 2, nil, 8 ]]
+      iex> Elixir2048.Grid.slide_rows(grid, :backward)
+      [
+        [4, nil, nil, nil ],
+        [2, nil, nil, nil ],
+        [8, nil, nil, nil ],
+        [2, 8  , nil, nil ]
+      ]
   """
   def slide_rows(grid, direction) do
     grid
@@ -122,19 +139,22 @@ defmodule Elixir2048.Grid do
   end
 
   @doc """
-  Checks if there are any possible moves left in `grid.`
+  Checks if there are any possible moves left in `grid`. Returns true when `grid` has empty spaces (nil elements), or any pairs that can be combined, returns false when `grid` is completely full (no nil elements) and cannot combine pairs in any direction.
 
-  iex> grid = [[nil, 2], [2, 4]]
-  iex> Elixir2048.Grid.remaining_moves?(grid)
-  true
+  ## Example 1
+      iex> grid = [[nil, 2], [2, 4]]
+      iex> Elixir2048.Grid.remaining_moves?(grid)
+      true
 
-  iex> grid = [[2, 2], [8, 4]]
-  iex> Elixir2048.Grid.remaining_moves?(grid)
-  true
+  ## Example 2
+      iex> grid = [[2, 2], [8, 4]]
+      iex> Elixir2048.Grid.remaining_moves?(grid)
+      true
 
-  iex> grid = [[2, 4], [8, 16]]
-  iex> Elixir2048.Grid.remaining_moves?(grid)
-  false
+  ## Example 3
+      iex> grid = [[2, 4], [8, 16]]
+      iex> Elixir2048.Grid.remaining_moves?(grid)
+      false
   """
   def remaining_moves?(grid) do
     # First check for empty spaces (to avoid extra computation during game play), then test if each possible move direction changes the grid.
@@ -149,18 +169,18 @@ defmodule Elixir2048.Grid do
   end
 
   # Return false if reached the end of all lists and no nil spaces found
-  def empty_spaces?([]), do: false
+  defp empty_spaces?([]), do: false
 
   # Check for empty spaces in nested list
-  def empty_spaces?([head | tail]) when is_list(head) do
+  defp empty_spaces?([head | tail]) when is_list(head) do
     empty_spaces?(head) || empty_spaces?(tail)
   end
 
   # Return true on first nil element
-  def empty_spaces?([nil | _tail]), do: true
+  defp empty_spaces?([nil | _tail]), do: true
 
   # Continue checking if element was not nil
-  def empty_spaces?([_head | tail]) do
+  defp empty_spaces?([_head | tail]) do
     empty_spaces?(tail)
   end
 end

@@ -2,25 +2,31 @@ defmodule Elixir2048.Vector do
   alias Elixir2048.Vector, as: Vector
   defstruct list: [], values: [], spaces: []
 
-  def new_vector(list), do: %Vector{list: list}
-  def get_list(%Vector{list: list}), do: list
+  defp new_vector(list), do: %Vector{list: list}
+  defp get_list(%Vector{list: list}), do: list
 
   @doc """
-  Slides all values in `list` based on `direction.` When `direction` is :forward moves all non-nil elements to right side of list and combines pairs from right to left, when `direction` is :backward moves non-nil elements to left side of list and combines pairs from left to right
+  Slides all values in `list` a certain `direction` and combines adjacent pairs. When `direction` is `:forward` it moves all non-nil elements to right side of list and combines pairs from right to left, when `direction` is `:backward` it moves non-nil elements to left side of list and combines pairs from left to right
 
-  iex> list = [2, nil, 2, 2, 4]
-  iex> Elixir2048.Vector.slide(list, :forward)
-  [nil, nil, 2, 4, 4]
-  iex> Elixir2048.Vector.slide(list, :backward)
-  [4, 2, 4, nil, nil]
+  ## Forward Example
+      iex> list = [2, nil, 2, 2, 4]
+      iex> Elixir2048.Vector.slide(list, :forward)
+      [nil, nil, 2, 4, 4]
+
+  ## Backward Example
+      iex> list = [2, nil, 2, 2, 4]
+      iex> Elixir2048.Vector.slide(list, :backward)
+      [4, 2, 4, nil, nil]
   """
+  def slide(list, direction)
+
+  # Combine matches from last to first and add spaces to front
   def slide(list, :forward) do
-    # Combine matches from last to first and add spaces to front
     list |> slide_list(combine_from: :last_to_first, add_spaces_to: :front)
   end
 
+  # Combine matches from first to last and add spaces to back
   def slide(list, :backward) do
-    # Combine matches from first to last and add spaces to back
     list |> slide_list(combine_from: :first_to_last, add_spaces_to: :back)
   end
 
@@ -36,7 +42,7 @@ defmodule Elixir2048.Vector do
 
   # Convert vector list into two separate lists:
   # One for (empty) spaces and one for values.
-  def separate_values_and_spaces(vector = %Vector{list: list}) do
+  defp separate_values_and_spaces(vector = %Vector{list: list}) do
     %Vector{ List.foldr(list, vector, &add_space_or_value/2) | list: []}
   end
 

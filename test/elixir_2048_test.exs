@@ -10,5 +10,6 @@ end
 # move_up - DONE
 # move_down - DONE
 # game_over - DONE
-# new_game -
-# add_random_element -
+# new_game - DONE
+# add_random_element - DONE
+# cli 

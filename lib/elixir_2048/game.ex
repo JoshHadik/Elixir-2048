@@ -7,8 +7,8 @@ defmodule Elixir2048.Game do
 
   ## Game Struct Helper Methods ##
 
-  def new(grid), do: %Game{grid: grid}
-  def get_grid(%Game{grid: grid}), do: grid
+  # def new(grid), do: %Game{grid: grid}
+  # def get_grid(%Game{grid: grid}), do: grid
 
   def update_grid(new_grid, game = %Game{}) do
     %Game{ game | grid: new_grid }
