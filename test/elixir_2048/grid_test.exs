@@ -180,6 +180,16 @@ defmodule Elixir2048.GridTest do
       assert Grid.remaining_moves?(@grid_2) == true
     end
 
+    test "returns true when grid is full but can move up or down" do
+      grid = [[2, 4], [2, 4]]
+      assert Grid.remaining_moves?(grid) == true
+    end
+
+    test "returns true when grid is full but can move left or right" do
+      grid = [[2, 2], [4, 4]]
+      assert Grid.remaining_moves?(grid) == true
+    end
+
     test "returns false when grid is full" do
       assert Grid.remaining_moves?(@full_grid) == false
     end

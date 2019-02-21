@@ -137,7 +137,7 @@ defmodule Elixir2048.Grid do
   false
   """
   def remaining_moves?(grid) do
-    # First check for empty spaces (to avoid extra computation during game play), then test if each possible move direction changes the grid
+    # First check for empty spaces (to avoid extra computation during game play), then test if each possible move direction changes the grid.
     empty_spaces?(grid) || possible_moves?(grid)
   end
 
@@ -152,8 +152,7 @@ defmodule Elixir2048.Grid do
   def empty_spaces?([]), do: false
 
   # Check for empty spaces in nested list
-  def empty_spaces?([head | tail])
-  when is_list(head) do
+  def empty_spaces?([head | tail]) when is_list(head) do
     empty_spaces?(head) || empty_spaces?(tail)
   end
 

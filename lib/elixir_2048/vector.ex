@@ -2,22 +2,25 @@ defmodule Elixir2048.Vector do
   alias Elixir2048.Vector, as: Vector
   defstruct list: [], values: [], spaces: []
 
-  ## Vector Struct Helpers ##
-
   def new_vector(list), do: %Vector{list: list}
   def get_list(%Vector{list: list}), do: list
 
-  ## Handle Slide Directions ##
+  @doc """
+  Slides all values in `list` based on `direction.` When `direction` is :forward moves all non-nil elements to right side of list and combines pairs from right to left, when `direction` is :backward moves non-nil elements to left side of list and combines pairs from left to right
 
-  # Combine matches from last to first
-  # And add spaces to front when sliding forward
+  iex> list = [2, nil, 2, 2, 4]
+  iex> Elixir2048.Vector.slide(list, :forward)
+  [nil, nil, 2, 4, 4]
+  iex> Elixir2048.Vector.slide(list, :backward)
+  [4, 2, 4, nil, nil]
+  """
   def slide(list, :forward) do
+    # Combine matches from last to first and add spaces to front
     list |> slide_list(combine_from: :last_to_first, add_spaces_to: :front)
   end
 
-  # Combine matches from first to last
-  # And add spaces to back when sliding backward
   def slide(list, :backward) do
+    # Combine matches from first to last and add spaces to back
     list |> slide_list(combine_from: :first_to_last, add_spaces_to: :back)
   end
 
@@ -30,8 +33,6 @@ defmodule Elixir2048.Vector do
     |> add_spaces(side)
     |> get_list()
   end
-
-  ## Separate Values & Spaces ##
 
   # Convert vector list into two separate lists:
   # One for (empty) spaces and one for values.
@@ -49,8 +50,6 @@ defmodule Elixir2048.Vector do
   defp add_space_or_value(value, vector = %Vector{values: values}) do
     %Vector{ vector | values: [value | values] }
   end
-
-  ## Combine Matches ##
 
   # Combine first matching values from first element and to last
   # [2, 2, 2] => [4, 2]
@@ -96,8 +95,6 @@ defmodule Elixir2048.Vector do
   defp missing_spaces(values, new_values) do
     List.duplicate(nil, (length(values) - length(new_values)))
   end
-
-  ## Add Spaces ##
 
   # Add spaces to back of list
   defp add_spaces(vector = %Vector{list: list, spaces: spaces}, :back) do
