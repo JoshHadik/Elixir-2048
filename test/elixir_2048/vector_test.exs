@@ -1,7 +1,7 @@
 defmodule Elixir2048.VectorTest do
   use ExUnit.Case
   doctest Elixir2048.Vector
-  
+
   alias Elixir2048.Vector, as: Vector
 
   describe "#slide(:forward)" do
@@ -17,7 +17,7 @@ defmodule Elixir2048.VectorTest do
       assert Vector.slide([2, 32, nil, 64], :forward) == [nil, 2, 32, 64]
     end
 
-    test "adds matched elements before moving to right" do
+    test "combines matched elements before moving to right" do
       assert Vector.slide([2, 2, nil, nil], :forward) == [nil, nil, nil, 4]
       assert Vector.slide([16, 16, nil, 2], :forward) == [nil, nil, 32, 2]
       assert Vector.slide([2, 2, 4, 8], :forward) == [nil, 4, 4, 8]
@@ -38,7 +38,7 @@ defmodule Elixir2048.VectorTest do
       assert Vector.slide([2, 32, nil, 64], :backward) == [2, 32, 64, nil]
     end
 
-    test "adds matched elements before moving to left" do
+    test "combines matched elements before moving to left" do
       assert Vector.slide([2, 2, nil, nil], :backward) == [4, nil, nil, nil]
       assert Vector.slide([16, 16, nil, 2], :backward) == [32, 2, nil, nil]
       assert Vector.slide([16, 16, 2, 2], :backward) == [32, 4, nil, nil]

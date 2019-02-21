@@ -1,4 +1,7 @@
 defmodule Elixir2048.Vector do
+  @moduledoc """
+  Handles logic for sliding non-nil elements to the right or left side of a list while combining matched pairs.
+  """
   alias Elixir2048.Vector, as: Vector
   defstruct list: [], values: [], spaces: []
 

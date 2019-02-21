@@ -1,4 +1,7 @@
 defmodule Elixir2048.Grid do
+  @moduledoc """
+  Handles logic related to the 2048 game grid, including rows left and right, sliding columns up and down, and checking if the grid has any remaining moves left.
+  """
   alias Elixir2048.Vector, as: Vector
 
   @doc """
@@ -152,11 +155,14 @@ defmodule Elixir2048.Grid do
       iex> Elixir2048.Grid.remaining_moves?(grid)
       false
   """
+  def remaining_moves?(grid)
+
+  # First check for empty spaces (to avoid extra computation during game play), then test if each possible move direction changes the grid.
   def remaining_moves?(grid) do
-    # First check for empty spaces (to avoid extra computation during game play), then test if each possible move direction changes the grid.
     empty_spaces?(grid) || possible_moves?(grid)
   end
 
+  # Test all possible movements (up, down, left, right) and return true if grid changes on any of them.
   defp possible_moves?(grid) do
     slide_rows(grid, :forward)     != grid ||
     slide_rows(grid, :backward)    != grid ||
