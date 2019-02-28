@@ -34,9 +34,13 @@ defmodule Elixir2048.Grid do
   def populate_2_or_4_randomly(grid, repeat \\ 1)
   def populate_2_or_4_randomly(grid, 0), do: grid
   def populate_2_or_4_randomly(grid, repeat) do
-    get_2_or_4_randomly()
-    |> add_to_random_space_in_grid(grid)
-    |> populate_2_or_4_randomly(repeat - 1)
+    case empty_spaces?(grid) do
+      true ->
+        get_2_or_4_randomly()
+        |> add_to_random_space_in_grid(grid)
+        |> populate_2_or_4_randomly(repeat - 1)
+      false -> grid
+    end
   end
 
   # Returns 2 ~75% of the time, and 4 ~25% of the time.
@@ -45,7 +49,7 @@ defmodule Elixir2048.Grid do
   # Adds value to random empty space in grid
   defp add_to_random_space_in_grid(value, grid) do
     grid
-    |> get_location_of_all_spaces
+    |> get_locations_of_empty_spaces
     |> Enum.random()
     |> add_value_at_position(grid, value)
   end
@@ -53,7 +57,7 @@ defmodule Elixir2048.Grid do
   import Enum, only: [with_index: 1]
 
   # Returns list of tuples containing {row, col} coordinate tuples for all empty spaces in grid
-  defp get_location_of_all_spaces(grid) do
+  defp get_locations_of_empty_spaces(grid) do
     for {row, x} <- with_index(grid), {el, y} <- with_index(row), el == nil do
       {x, y}
     end
@@ -123,8 +127,7 @@ defmodule Elixir2048.Grid do
       ]
   """
   def slide_rows(grid, direction) do
-    grid
-    |> slide_vectors(direction)
+    grid |> slide_vectors(direction)
   end
 
   # Slide all columns or rows forward or backward
@@ -155,10 +158,8 @@ defmodule Elixir2048.Grid do
       iex> Elixir2048.Grid.remaining_moves?(grid)
       false
   """
-  def remaining_moves?(grid)
-
-  # First check for empty spaces (to avoid extra computation during game play), then test if each possible move direction changes the grid.
   def remaining_moves?(grid) do
+    # First check for empty spaces (to avoid extra computation during game play), then test if each possible move direction changes the grid.
     empty_spaces?(grid) || possible_moves?(grid)
   end
 

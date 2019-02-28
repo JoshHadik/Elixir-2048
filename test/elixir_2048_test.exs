@@ -4,12 +4,12 @@ defmodule Elixir2048Test do
 end
 
 
-# move_right single list - DONE
-# move_left single list - DONE
-# move_right & move_left game grid - DONE
-# move_up - DONE
-# move_down - DONE
-# game_over - DONE
-# new_game - DONE
-# add_random_element - DONE
-# cli 
+# move_right single list - TESTED & IMPLEMENTED
+# move_left single list - TESTED & IMPLEMENTED
+# move_right & move_left game grid - TESTED & IMPLEMENTED
+# move_up - TESTED & IMPLEMENTED
+# move_down - TESTED & IMPLEMENTED
+# game_over - TESTED & IMPLEMENTED
+# new_game - TESTED & IMPLEMENTED
+# add_random_element - TESTED & IMPLEMENTED
+# cli - IMPLEMENTED

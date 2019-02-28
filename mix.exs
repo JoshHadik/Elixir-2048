@@ -9,12 +9,13 @@ defmodule Elixir2048.MixProject do
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
-        "coveralls": :test,
+        coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-      deps: deps()
+      deps: deps(),
+      escript: escript_config()
     ]
   end
 
@@ -33,5 +34,10 @@ defmodule Elixir2048.MixProject do
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
+  end
+
+  # Start command line script
+  defp escript_config do
+    [main_module: Elixir2048.CLI.Runner]
   end
 end

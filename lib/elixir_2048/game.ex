@@ -8,6 +8,16 @@ defmodule Elixir2048.Game do
 
   @grid_size 4
 
+  @permitted_actions [:slide_right, :slide_left, :slide_down, :slide_up]
+
+  def perform(game = %Game{}, action) when action in @permitted_actions do
+    # Only add new elements to grid if grid was changed
+    case apply(Game, action, [game]) do
+      ^game -> game |> check_status()
+      new_game -> new_game |> new_turn() |> check_status()
+    end
+  end
+
   @doc """
   Creates a new game of `size \\\\ 4` and populates randomly with first two values of either 2 or 4.
 
@@ -24,6 +34,13 @@ defmodule Elixir2048.Game do
     Grid.empty_grid_of_size(size)
     |> Grid.populate_2_or_4_randomly(2)
     |> update_grid(%Game{})
+  end
+
+  # Add new value randomly on new turn
+  def new_turn(game = %Game{grid: grid}) do
+    grid
+    |> Grid.populate_2_or_4_randomly()
+    |> update_grid(game)
   end
 
   @doc """
