@@ -4,18 +4,22 @@
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `elixir_2048` to your list of dependencies in `mix.exs`:
+A CLI implementation of the popular iPhone app (from like 8 years ago) 2048. All you need to do to play is clone the repository and fetch a local copy of it, and ensure you have Erlang and Elixir setup on your local machine.
 
-```elixir
-def deps do
-  [
-    {:elixir_2048, "~> 0.1.0"}
-  ]
-end
+Once you have a local version of the app, simply navigate to the main directory in your terminal and run
+
+```bash
+mix deps.get
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/elixir_2048](https://hexdocs.pm/elixir_2048).
+Then run
 
+```bash
+mix escript.build
+```
+
+And finally run
+
+```bash
+ ./elixir_2048
+```
