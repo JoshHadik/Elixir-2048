@@ -1,25 +1,37 @@
-# Elixir2048
+# Elixir 2048
 
-**TODO: Add description**
+A CLI implementation of the popular iPhone app (from like 8 years ago) 2048.
 
 ## Installation
 
-A CLI implementation of the popular iPhone app (from like 8 years ago) 2048. All you need to do to play is clone the repository and fetch a local copy of it, and ensure you have Erlang and Elixir setup on your local machine.
+All you need to do to play is clone this repository:
 
-Once you have a local version of the app, simply navigate to the main directory in your terminal and run
+```bash
+git clone git@github.com:JoshHadik/Elixir-2048.git
+```
+
+Change into the root directory:
+
+```bash
+cd Elixir-2048/
+```
+
+Install the dependencies:
 
 ```bash
 mix deps.get
 ```
 
-Then run
+Build the script:
 
 ```bash
 mix escript.build
 ```
 
-And finally run
+And finally run the script:
 
 ```bash
  ./elixir_2048
 ```
+
+Enjoy!
